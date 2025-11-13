@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid with Circles</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(5, 1fr);
+            gap: 4.9%;
+            width: 24%;
+            height: fit-content;
+        }
+
+        .grid-cell {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            aspect-ratio: 1 / 1;
+        }
+
+        .circle-wrapper {
+            width: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            max-width: 100%;
+            aspect-ratio: 1 / 1;
+            max-width: 100%;
+            display: flex;
+        }
+
+        .circle {
+            width: 100%;
+            border-radius: 50%;
+            background-color: #fff;
+            transition: background-color 0.25s 0.1s ease-in-out, scale 0.5s cubic-bezier(0.215, 0.610, 0.355, 1);
+            scale: 0.33;
+        }
+
+        .circle.no-transition {
+            transition: none;
+        }
+
+        .circle-level-1 {
+            background-color: #e9e9e9;
+        }
+
+        .circle-wrapper:has(.circle-level-2) {
+            background-color: #e9e9e9;
+        }
+
+        .circle-level-2 {
+            background-color: #bdbdbd;
+        }
+
+        .circle-wrapper:has(.circle-level-3) {
+            background-color: #bdbdbd;
+        }
+
+        .circle-level-3 {
+            background-color: #252525;
+        }
+
+        .container {
+            position: relative;
+            display: flex;
+            max-width: 100%;
+            width: 1247px;
+            margin: 20px;
+        }
+
+        .container img {
+            max-width: 75%;
+            opacity: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="grid-container">
+            <div class="grid-cell">
+                <div class="circle-wrapper">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="grid-cell">
+                <div class="circle-wrapper">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="grid-cell">
+                <div class="circle-wrapper">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="grid-cell">
+                <div class="circle-wrapper">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="grid-cell">
+                <div class="circle-wrapper">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="grid-cell">
+                <div class="circle-wrapper">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="grid-cell">
+                <div class="circle-wrapper">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="grid-cell">
+                <div class="circle-wrapper">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="grid-cell">
+                <div class="circle-wrapper">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="grid-cell">
+                <div class="circle-wrapper">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="grid-cell">
+                <div class="circle-wrapper">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="grid-cell">
+                <div class="circle-wrapper">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="grid-cell">
+                <div class="circle-wrapper">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="grid-cell">
+                <div class="circle-wrapper">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="grid-cell">
+                <div class="circle-wrapper">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="grid-cell">
+                <div class="circle-wrapper">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="grid-cell">
+                <div class="circle-wrapper">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="grid-cell">
+                <div class="circle-wrapper">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="grid-cell">
+                <div class="circle-wrapper">
+                    <div class="circle"></div>
+                </div>
+            </div>
+            <div class="grid-cell">
+                <div class="circle-wrapper">
+                    <div class="circle"></div>
+                </div>
+            </div>
+        </div>
+        <img src="logo.png" alt="">
+    </div>
+    <script>
+        let positionsAnimation = [
+            [0, 0], [1, 0], [2, 0], [2, 1], [3, 1], [2, 1], [1, 1], [0, 1], [0, 0], [0, 1], [1, 1], [1, 2], [1, 3],
+            [2, 3], [2, 2], [1, 2], [1, 1], [1, 0], [0, 0], [0, 1], [0, 2], [0, 3], [0, 2], [0, 3], [1, 3], [1, 4],
+            [2, 4], [2, 3], [2, 4], [1, 4], [3, 4]
+        ];
+
+        let index = 0;
+        function moveCircle() {
+            if (index >= positionsAnimation.length) {
+                return;
+            }
+            const [col, row] = positionsAnimation[index];
+            const targetElement = document.querySelector(`.grid-cell:nth-child(${row * 4 + col + 1}) .circle`);
+            let currentLevel = targetElement.className.match(/circle-level-(\d)/)?.[1] || 0;
+            if (col === 2 && row === 4 && currentLevel === "2") {
+                currentLevel = "1";
+            }
+            if (col === 0 && row === 2 && currentLevel === 0) {
+                currentLevel = "1";
+            }
+            if (col === 0 && row === 3 && currentLevel === 0) {
+                currentLevel = "1";
+            }
+            if (col === 1 && row === 4 && currentLevel === 0) {
+                currentLevel = "1";
+            }
+            targetElement.classList.remove(`circle-level-${currentLevel}`);
+            targetElement.classList.add(`circle-level-${parseInt(currentLevel) + 1}`);
+            targetElement.classList.add('no-transition');
+            targetElement.style.scale = 0.33;
+            setTimeout(() => {
+                targetElement.classList.remove('no-transition');
+                targetElement.style.scale = 1;
+            }, 30);
+            index++;
+            if (index === positionsAnimation.length) {
+                setTimeout(() => {
+                    const img = document.querySelector('.container img');
+                    img.style.transition = 'opacity 1s ease-in-out';
+                    img.style.opacity = 1;
+                }, 1000);
+            }
+        }
+        setInterval(moveCircle, 200);
+        // moveCircle();
+        //  moveCircle();
+
+    </script>
+</body>
+
+</html>
